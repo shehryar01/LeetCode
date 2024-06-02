@@ -1,40 +1,24 @@
 class Solution {
     func reverseVowels(_ s: String) -> String {
+    var characters = Array(s)
+    var left = 0
+    var right = characters.count - 1
 
-        var idxOfVowels = [Int]()
-        var vowels = [Character]()
-
-        var str = s
-        
-        for (idx, val) in s.enumerated() {
-            if isVowel(val) {
-                print("k", idx)
-                idxOfVowels.append(idx)
-                vowels.append(val)
-            }
+    while left < right {
+        while left < right && !isVowel(characters[left]) {
+            left += 1
         }
-
-        vowels.reverse()
-        var counter = 0
-        
-        var reversepointer = s.count - 1
-        var new = ""
-
-        for (idx, val) in s.enumerated() {
-            if isVowel(val) {
-                let k = vowels[counter]
-                new += String(k)
-                counter += 1
-            }else {
-                new += String(val)
-            }
+        while left < right && !isVowel(characters[right]) {
+            right -= 1
         }
-
-
-        
-
-
-        return new
+        if left < right {
+            characters.swapAt(left, right)
+            left += 1
+            right -= 1
+        }
+    }
+    
+    return String(characters)
     }
 
     func isVowel(_ str: Character) -> Bool {
