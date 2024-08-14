@@ -16,20 +16,19 @@ class Solution {
         nums = arr
         */
 
-        var i = 0
+        let size = nums.count
+        var array = nums
     
-        // Move non-zero elements to the front
-        for j in 0..<nums.count {
-            if nums[j] != 0 {
-                nums[i] = nums[j]
-                i += 1
+        for x in 0..<size {
+            for y in 0..<size-x-1 {
+                if array[y] == 0 {
+                    // swap w/o 3rd variable
+                    array[y] = array[y] + array[y + 1]
+                    array[y + 1] = array[y] - array[y + 1]
+                    array[y] = array[y] - array[y + 1]
+                }
             }
         }
-        
-        // Fill the remaining positions with zeros
-        while i < nums.count {
-            nums[i] = 0
-            i += 1
-        }
+        nums = array
     }
 }
